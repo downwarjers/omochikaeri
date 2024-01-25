@@ -7,11 +7,15 @@ spring:
   main:
     allow-circular-references: true
   datasource:
-    druid:
-      driver-class-name: ${omochi.datasource.driver-class-name}
-      url: jdbc:mysql://${omochi.datasource.host}:${omochi.datasource.port}/${omochi.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertcode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertSLMhavior=convertSL&Ft. =true
-      username: ${omochi.datasource.username}
-      password: ${omochi.datasource.password}
+    driver-class-name: ${omochi.datasource.driver-class-name}
+    url: jdbc:mysql://${omochi.datasource.host}:${omochi.datasource.port}/${omochi.datasource.database}?serverTimezone=Asia/Taipei&characterEncoding=utf-8
+    username: ${omochi.datasource.username}
+    password: ${omochi.datasource.password}
+  jackson:
+    date-format:
+      yyyy-MM-dd HH:mm:ss
+    time-zone:
+      GMT+8
 
 mybatis:
   #mapper設定檔

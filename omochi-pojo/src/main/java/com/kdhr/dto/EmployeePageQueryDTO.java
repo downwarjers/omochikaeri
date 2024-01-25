@@ -1,1 +1,20 @@
 package com.kdhr.dto;
+
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class EmployeePageQueryDTO implements Serializable {
+
+    //員工姓名
+    private String name;
+
+    //頁碼
+    private int page;
+
+    //每頁顯示記錄數
+    private int pageSize;
+
+}
