@@ -1,6 +1,7 @@
 package com.kdhr.admin;
 
 import com.kdhr.constant.JwtClaimsConstant;
+import com.kdhr.dto.EmployeeDTO;
 import com.kdhr.dto.EmployeeLoginDTO;
 import com.kdhr.entity.Employee;
 import com.kdhr.properties.JwtProperties;
@@ -8,6 +9,8 @@ import com.kdhr.result.Result;
 import com.kdhr.service.EmployeeService;
 import com.kdhr.utils.JwtUtil;
 import com.kdhr.vo.EmployeeLoginVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +41,7 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/login")
+    @ApiOperation("員工登入")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
         log.info("員工登入：{}", employeeLoginDTO);
 
@@ -67,8 +71,21 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/logout")
+    @ApiOperation("員工登出")
     public Result<String> logout() {
         return Result.success();
     }
 
+    /**
+     * 新增員工
+     * @param employeeDTO
+     * @return
+     */
+    @PostMapping("")
+    @ApiOperation("新增員工")
+    public Result<?> save(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("新增員工：{}", employeeDTO);
+        employeeService.save(employeeDTO);
+        return Result.success();
+    }
 }

@@ -1,6 +1,7 @@
 package com.kdhr.interceptor;
 
 import com.kdhr.constant.JwtClaimsConstant;
+import com.kdhr.context.BaseContext;
 import com.kdhr.properties.JwtProperties;
 import com.kdhr.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -33,6 +34,10 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //TODO 預設不檢驗Token
+        if (true) {
+            return true;
+        }
         //判斷目前攔截到的是Controller的方法還是其他資源
         if (!(handler instanceof HandlerMethod)) {
             //目前攔截到的不是動態方法，直接放行
@@ -47,6 +52,7 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
             log.info("jwt校驗:{}", token);
             Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
             Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
+            BaseContext.setCurrentId(empId);
             log.info("現任員工id：", empId);
             //3、通過，放行
             return true;

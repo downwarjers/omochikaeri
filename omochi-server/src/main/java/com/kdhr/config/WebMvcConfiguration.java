@@ -44,14 +44,14 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Bean
     public Docket docket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("天空外送專案介面文件")
+                .title("OMOCHI外送專案介面文件")
                 .version("2.0")
-                .description("天空外送專案介面文件")
+                .description("OMOCHI外送專案介面文件")
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.kdhr.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.kdhr"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;

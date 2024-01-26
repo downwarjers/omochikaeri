@@ -1,5 +1,6 @@
 package com.kdhr.service;
 
+import com.kdhr.dto.EmployeeDTO;
 import com.kdhr.dto.EmployeeLoginDTO;
 import com.kdhr.entity.Employee;
 
@@ -12,4 +13,5 @@ public interface EmployeeService {
      */
     Employee login(EmployeeLoginDTO employeeLoginDTO);
 
+    void save(EmployeeDTO employeeDTO);
 }
