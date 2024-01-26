@@ -30,6 +30,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public Result exceptionHandler(SQLIntegrityConstraintViolationException ex) {
+        log.info("處理欄位值重複例外");
         String message = ex.getMessage();
         if (message.contains("Duplicate entry")) {
             String[] split = message.split(" ");

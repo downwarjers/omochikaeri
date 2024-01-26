@@ -1,6 +1,5 @@
 package com.kdhr.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,7 +15,6 @@ public class OrdersSubmitDTO implements Serializable {
     //備注
     private String remark;
     //預計送達時間
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime estimatedDeliveryTime;
     //配送狀態  1立即送出  0選擇具體時間
     private Integer deliveryStatus;

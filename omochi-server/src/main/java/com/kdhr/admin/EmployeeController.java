@@ -3,8 +3,10 @@ package com.kdhr.admin;
 import com.kdhr.constant.JwtClaimsConstant;
 import com.kdhr.dto.EmployeeDTO;
 import com.kdhr.dto.EmployeeLoginDTO;
+import com.kdhr.dto.EmployeePageQueryDTO;
 import com.kdhr.entity.Employee;
 import com.kdhr.properties.JwtProperties;
+import com.kdhr.result.PageResult;
 import com.kdhr.result.Result;
 import com.kdhr.service.EmployeeService;
 import com.kdhr.utils.JwtUtil;
@@ -13,10 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,6 +77,7 @@ public class EmployeeController {
 
     /**
      * 新增員工
+     *
      * @param employeeDTO
      * @return
      */
@@ -87,5 +87,17 @@ public class EmployeeController {
         log.info("新增員工：{}", employeeDTO);
         employeeService.save(employeeDTO);
         return Result.success();
+    }
+
+    /**
+     * @param employeePageQueryDTO
+     * @return
+     */
+    @GetMapping
+    @ApiOperation("分頁查詢員工")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
+        log.info("分頁查詢員工，參數為:{}" + employeePageQueryDTO);
+        PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
+        return Result.success(pageResult);
     }
 }

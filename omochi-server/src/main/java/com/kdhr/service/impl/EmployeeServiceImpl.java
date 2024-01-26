@@ -1,22 +1,27 @@
 package com.kdhr.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.kdhr.constant.MessageConstant;
 import com.kdhr.constant.PasswordConstant;
 import com.kdhr.constant.StatusConstant;
 import com.kdhr.context.BaseContext;
 import com.kdhr.dto.EmployeeDTO;
 import com.kdhr.dto.EmployeeLoginDTO;
+import com.kdhr.dto.EmployeePageQueryDTO;
 import com.kdhr.entity.Employee;
 import com.kdhr.exception.AccountLockedException;
 import com.kdhr.exception.AccountNotFoundException;
 import com.kdhr.exception.PasswordErrorException;
 import com.kdhr.mapper.EmployeeMapper;
+import com.kdhr.result.PageResult;
 import com.kdhr.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -76,6 +81,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setUpdateUser(BaseContext.getCurrentId());
 
         employeeMapper.insert(employee);
+    }
+
+    @Override
+    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
+
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
+
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
 }
