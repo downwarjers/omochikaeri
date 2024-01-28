@@ -1,8 +1,10 @@
 package com.kdhr.mapper;
 
 import com.github.pagehelper.Page;
+import com.kdhr.annotation.AutoFill;
 import com.kdhr.dto.EmployeePageQueryDTO;
 import com.kdhr.entity.Employee;
+import com.kdhr.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,6 +26,7 @@ public interface EmployeeMapper {
      *
      * @param employee
      */
+    @AutoFill(OperationType.INSERT)
     @Insert("insert into employee(name, username, password, phone, sex, id_number, status, create_time, update_time, create_user, update_user) " +
             "VALUES (#{name}, #{username}, #{password}, #{phone},#{sex}, #{idNumber}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
     void insert(Employee employee);
@@ -41,10 +44,12 @@ public interface EmployeeMapper {
      *
      * @param employee
      */
+    @AutoFill(OperationType.UPDATE)
     void update(Employee employee);
 
     /**
      * 根據id查詢員工
+     *
      * @param id
      * @return
      */

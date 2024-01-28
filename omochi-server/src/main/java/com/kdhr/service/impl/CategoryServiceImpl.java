@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.kdhr.constant.MessageConstant;
 import com.kdhr.constant.StatusConstant;
-import com.kdhr.context.BaseContext;
 import com.kdhr.dto.CategoryDTO;
 import com.kdhr.dto.CategoryPageQueryDTO;
 import com.kdhr.entity.Category;
@@ -19,7 +18,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -46,11 +44,6 @@ public class CategoryServiceImpl implements CategoryService {
         //分類狀態預設為停用狀態0
         category.setStatus(StatusConstant.DISABLE);
 
-        //設定創建時間、修改時間、建立人、修改人
-        category.setCreateTime(LocalDateTime.now());
-        category.setUpdateTime(LocalDateTime.now());
-        category.setCreateUser(BaseContext.getCurrentId());
-        category.setUpdateUser(BaseContext.getCurrentId());
 
         categoryMapper.insert(category);
     }
@@ -101,10 +94,6 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDTO, category);
 
-        //設定修改時間、修改人
-        category.setUpdateTime(LocalDateTime.now());
-        category.setUpdateUser(BaseContext.getCurrentId());
-
         categoryMapper.update(category);
     }
 
@@ -120,8 +109,6 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
                 .build();
         categoryMapper.update(category);
     }

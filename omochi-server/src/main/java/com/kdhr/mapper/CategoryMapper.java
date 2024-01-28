@@ -1,8 +1,10 @@
 package com.kdhr.mapper;
 
 import com.github.pagehelper.Page;
+import com.kdhr.annotation.AutoFill;
 import com.kdhr.dto.CategoryPageQueryDTO;
 import com.kdhr.entity.Category;
+import com.kdhr.enumeration.OperationType;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,6 +19,7 @@ public interface CategoryMapper {
      *
      * @param category
      */
+    @AutoFill(OperationType.INSERT)
     @Insert("insert into category(type, name, sort, status, create_time, update_time, create_user, update_user)" +
             " VALUES (#{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
     void insert(Category category);
@@ -42,6 +45,7 @@ public interface CategoryMapper {
      *
      * @param category
      */
+    @AutoFill(OperationType.UPDATE)
     void update(Category category);
 
     /**

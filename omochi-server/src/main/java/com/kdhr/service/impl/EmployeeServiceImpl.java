@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.kdhr.constant.MessageConstant;
 import com.kdhr.constant.PasswordConstant;
 import com.kdhr.constant.StatusConstant;
-import com.kdhr.context.BaseContext;
 import com.kdhr.dto.EmployeeDTO;
 import com.kdhr.dto.EmployeeLoginDTO;
 import com.kdhr.dto.EmployeePageQueryDTO;
@@ -20,8 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 
 @Service
@@ -80,12 +77,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(PasswordConstant.DEFAULT_PASSWORD);
         //預設狀態為啟用
         employee.setStatus(StatusConstant.ENABLE);
-        //日期時間
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-        //TODO 需取得當前登入員工ID
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
 
         employeeMapper.insert(employee);
     }
@@ -141,8 +132,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
-        employee.setUpdateUser(BaseContext.getCurrentId());
-        employee.setUpdateTime(LocalDateTime.now());
         employeeMapper.update(employee);
     }
 

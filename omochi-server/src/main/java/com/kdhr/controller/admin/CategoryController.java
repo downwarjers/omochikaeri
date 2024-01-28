@@ -1,4 +1,4 @@
-package com.kdhr.admin;
+package com.kdhr.controller.admin;
 
 import com.kdhr.dto.CategoryDTO;
 import com.kdhr.dto.CategoryPageQueryDTO;
