@@ -46,6 +46,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     /**
      * 透過knife4j產生介面文檔
+     *
      * @return
      */
     @Bean
@@ -67,6 +68,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     /**
      * 設定靜態資源映射
+     *
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -75,13 +77,18 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    /**
+     * 新增消息轉換器處理JSON日期時間格式
+     *
+     * @param converters
+     */
     @Override
     protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         //新增消息轉換器
-        MappingJackson2HttpMessageConverter converter=new MappingJackson2HttpMessageConverter();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         //為該消息轉換器新增對象轉換器，可將JAVA Object To JSON
         converter.setObjectMapper(new JacksonObjectMapper());
 
-        converters.add(0,converter);
+        converters.add(0, converter);
     }
 }

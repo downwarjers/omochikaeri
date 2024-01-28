@@ -1,6 +1,7 @@
 package com.kdhr.admin;
 
 import com.kdhr.constant.JwtClaimsConstant;
+import com.kdhr.constant.StatusConstant;
 import com.kdhr.dto.EmployeeDTO;
 import com.kdhr.dto.EmployeeLoginDTO;
 import com.kdhr.dto.EmployeePageQueryDTO;
@@ -25,6 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/admin/employee")
+@Api(tags ="員工相關介面")
 @Slf4j
 public class EmployeeController {
 
@@ -81,15 +83,17 @@ public class EmployeeController {
      * @param employeeDTO
      * @return
      */
-    @PostMapping("")
+    @PostMapping
     @ApiOperation("新增員工")
-    public Result<?> save(@RequestBody EmployeeDTO employeeDTO) {
+    public Result save(@RequestBody EmployeeDTO employeeDTO) {
         log.info("新增員工：{}", employeeDTO);
         employeeService.save(employeeDTO);
         return Result.success();
     }
 
     /**
+     * 分頁查詢員工
+     *
      * @param employeePageQueryDTO
      * @return
      */
@@ -99,5 +103,42 @@ public class EmployeeController {
         log.info("分頁查詢員工，參數為:{}" + employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 啟用或禁用員工
+     *
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("啟用或禁用員工")
+    public Result enable(@PathVariable Integer status, Long id) {
+        log.info("將員工id {} 狀態設為 {}", id, status);
+        employeeService.enable(status, id);
+        return Result.success();
+    }
+
+    /**
+     * 根據id查詢員工
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根據id查詢員工")
+    public Result<Employee> getById(@PathVariable Long id) {
+        log.info("查詢id:{}的員工", id);
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+    @PutMapping
+    @ApiOperation("編輯員工資訊")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("編輯員工資料 {}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
     }
 }

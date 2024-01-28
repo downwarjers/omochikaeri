@@ -15,7 +15,32 @@ public interface EmployeeService {
      */
     Employee login(EmployeeLoginDTO employeeLoginDTO);
 
+    /**
+     * 新增員工
+     * @param employeeDTO
+     */
     void save(EmployeeDTO employeeDTO);
 
+    /**
+     * 分頁查詢員工
+     * @param employeePageQueryDTO
+     * @return
+     */
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 啟用或禁用員工
+     * @param status
+     * @param id
+     */
+    void enable(Integer status, Long id);
+
+    /**
+     * 根據id查詢員工
+     * @param id
+     * @return
+     */
+    Employee getById(Long id);
+
+    void update(EmployeeDTO employeeDTO);
 }
