@@ -5,13 +5,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "omochi.alioss")
+@ConfigurationProperties(prefix = "omochikaeri.awsoss")
 @Data
-public class AliOssProperties {
+public class AwsOssProperties {
 
-    private String endpoint;
     private String accessKeyId;
     private String accessKeySecret;
+    private String region;
     private String bucketName;
 
 }

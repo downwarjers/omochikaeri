@@ -1,6 +1,5 @@
 package com.kdhr.utils;
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -13,6 +12,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URI;
@@ -127,7 +128,7 @@ public class HttpClientUtil {
      * @return
      * @throws IOException
      */
-    public static String doPost4Json(String url, Map<String, String> paramMap) throws IOException {
+    public static String doPost4Json(String url, Map<String, String> paramMap) throws IOException, JSONException {
         // 建立Httpclient對象
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;

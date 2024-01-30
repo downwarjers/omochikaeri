@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: ${omochikaeri.datasource.driver-class-name}
+    url: jdbc:mysql://${omochikaeri.datasource.host}:${omochikaeri.datasource.port}/${omochikaeri.datasource.database}?serverTimezone=Asia/Taipei&characterEncoding=utf-8
+    username: ${omochikaeri.datasource.username}
+    password: ${omochikaeri.datasource.password}
+  jackson:
+    date-format:
+      yyyy-MM-dd HH:mm:ss
+    time-zone:
+      GMT+8
+
+mybatis:
+  #mapper設定檔
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.kdhr.entity
+  configuration:
+    #開啟駝峰命名
+    map-underscore-to-camel-case: true
+    default-scripting-language: xml
+    default-schema: omochikaeri
+
+logging:
+  level:
+    com:
+      omochikaeri:
+        mapper: debug
+        service: info
+        controller: info
+
+omochikaeri:
+  jwt:
+    # 設定jwt簽章加密時所使用的秘鑰
+    admin-secret-key: itcast
+    # 設定jwt過期時間
+    admin-ttl: 7200000
+    # 設定前端傳遞過來的令牌名稱
+    admin-token-name: token
+  awsoss:
+    access-key-id: ${omochikaeri.awsoss.access-key-id}
+    access-key-secret: ${omochikaeri.awsoss.access-key-secret}
+    region: ${omochikaeri.awsoss.region}
+    bucket-name: ${omochikaeri.awsoss.bucket-name}

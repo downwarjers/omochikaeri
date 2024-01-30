@@ -1,0 +1,13 @@
+omochikaeri:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: omochikaeri
+    username: root
+    password: springboot
+  awsoss:
+    region: ap-northeast-1
+    access-key-id: AKIAU6GDVQJZKY4GHKE5
+    access-key-secret: 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
+    bucket-name: omochikaeri-aws-bucket
