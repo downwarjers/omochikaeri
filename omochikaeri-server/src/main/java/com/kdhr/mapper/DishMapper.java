@@ -1,7 +1,15 @@
 package com.kdhr.mapper;
 
+import com.github.pagehelper.Page;
+import com.kdhr.annotation.AutoFill;
+import com.kdhr.dto.DishPageQueryDTO;
+import com.kdhr.entity.Dish;
+import com.kdhr.enumeration.OperationType;
+import com.kdhr.vo.DishVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface DishMapper {
@@ -15,4 +23,25 @@ public interface DishMapper {
     @Select("select count(id) from dish where category_id = #{categoryId}")
     Integer countByCategoryId(Long categoryId);
 
+    /**
+     * 新增菜品
+     *
+     * @param dish
+     * @return
+     */
+    @AutoFill(OperationType.INSERT)
+    void insert(Dish dish);
+
+    /**
+     * 分頁查詢菜品
+     *
+     * @param dishPageQueryDTO
+     * @return
+     */
+    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+    @Select("select * from dish where id = #{id}")
+    Dish getById(Long ids);
+
+    void deleteBatch(List<Long> ids);
 }
