@@ -17,7 +17,7 @@
         <module>omochikaeri-server</module>
     </modules>
     <properties>
-        <mybatis.spring>3.0.2</mybatis.spring>
+        <mybatis.spring>2.2.0</mybatis.spring>
         <lombok>1.18.26</lombok>
         <commons.lang>2.6</commons.lang>
         <pagehelper>1.4.6</pagehelper>

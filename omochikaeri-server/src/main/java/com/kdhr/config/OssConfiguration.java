@@ -20,7 +20,6 @@ public class OssConfiguration {
     public AwsOssUtil awsOssUtil(AwsOssProperties awsOssProperties) {
         log.info("產生AWS文件上傳工具 {}", awsOssProperties);
 
-        //TODO 需要產生AWS文件上傳工具
         AwsOssUtil awsOssUtil = AwsOssUtil.builder()
                 .accessKeyId(awsOssProperties.getAccessKeyId())
                 .accessKeySecret(awsOssProperties.getAccessKeySecret())
