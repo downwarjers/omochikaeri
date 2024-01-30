@@ -57,14 +57,39 @@ public class DishController {
 
     /**
      * 批量刪除菜餚
+     *
      * @param ids
      * @return
      */
     @DeleteMapping
     @ApiOperation("批量刪除菜餚")
-    public Result deleteBatch(@RequestParam List<Long> ids){
-        log.info("批量刪除菜餚 {}",ids);
+    public Result deleteBatch(@RequestParam List<Long> ids) {
+        log.info("批量刪除菜餚 {}", ids);
         dishService.deleteBatch(ids);
         return Result.success();
     }
+
+
+    @GetMapping("/{id}")
+    @ApiOperation("根據id查詢菜品")
+    public Result<DishVO> getById(@PathVariable Long id) {
+        log.info("根據id查詢菜品 {}", id);
+        DishVO dishVO = dishService.getByIdWithFlavor(id);
+        return Result.success(dishVO);
+    }
+
+    /**
+     * 修改菜品
+     *
+     * @param dishDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO) {
+        log.info("修改菜品 {}", dishDTO);
+        dishService.update(dishDTO);
+        return Result.success();
+    }
+
 }
