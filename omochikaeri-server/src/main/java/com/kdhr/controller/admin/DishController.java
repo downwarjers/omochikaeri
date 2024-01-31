@@ -3,11 +3,13 @@ package com.kdhr.controller.admin;
 import com.kdhr.annotation.AutoFill;
 import com.kdhr.dto.DishDTO;
 import com.kdhr.dto.DishPageQueryDTO;
+import com.kdhr.entity.Dish;
 import com.kdhr.enumeration.OperationType;
 import com.kdhr.result.PageResult;
 import com.kdhr.result.Result;
 import com.kdhr.service.DishService;
 import com.kdhr.vo.DishVO;
+import com.kdhr.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,35 @@ public class DishController {
     private DishService dishService;
 
     /**
+     * 修改菜品
+     *
+     * @param dishDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO) {
+        log.info("修改菜品 {}", dishDTO);
+        dishService.update(dishDTO);
+        return Result.success();
+    }
+
+
+    /**
+     * 批量刪除菜餚
+     *
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation("批量刪除菜餚")
+    public Result deleteBatch(@RequestParam List<Long> ids) {
+        log.info("批量刪除菜餚 {}", ids);
+        dishService.deleteBatch(ids);
+        return Result.success();
+    }
+
+    /**
      * 新增菜品
      *
      * @param dishDTO
@@ -39,6 +70,33 @@ public class DishController {
         log.info("新增菜品 {}", dishDTO);
         dishService.save(dishDTO);
         return Result.success();
+    }
+
+    /**
+     * 根據id查詢菜品
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根據id查詢菜品")
+    public Result<DishVO> getById(@PathVariable Long id) {
+        log.info("根據id查詢菜品 {}", id);
+        DishVO dishVO = dishService.getByIdWithFlavor(id);
+        return Result.success(dishVO);
+    }
+
+    /**
+     * 根據分類id查詢菜餚
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/list")
+    @ApiOperation("根據分類id查詢菜餚")
+    public Result<List<Dish>> list(Long categoryId) {
+        log.info("分類id查詢菜餚 {}", categoryId);
+        List<Dish> dishList = dishService.list(categoryId);
+        return Result.success(dishList);
     }
 
     /**
@@ -56,40 +114,17 @@ public class DishController {
     }
 
     /**
-     * 批量刪除菜餚
+     * 菜品開售、停售
      *
-     * @param ids
+     * @param status
+     * @param id
      * @return
      */
-    @DeleteMapping
-    @ApiOperation("批量刪除菜餚")
-    public Result deleteBatch(@RequestParam List<Long> ids) {
-        log.info("批量刪除菜餚 {}", ids);
-        dishService.deleteBatch(ids);
+    @PostMapping("status/{status}")
+    @ApiOperation("菜品開售、停售")
+    public Result enable(@PathVariable Integer status, Long id) {
+        log.info("將菜品id {} 狀態設為 {}", id, status);
+        dishService.enable(status, id);
         return Result.success();
     }
-
-
-    @GetMapping("/{id}")
-    @ApiOperation("根據id查詢菜品")
-    public Result<DishVO> getById(@PathVariable Long id) {
-        log.info("根據id查詢菜品 {}", id);
-        DishVO dishVO = dishService.getByIdWithFlavor(id);
-        return Result.success(dishVO);
-    }
-
-    /**
-     * 修改菜品
-     *
-     * @param dishDTO
-     * @return
-     */
-    @PutMapping
-    @ApiOperation("修改菜品")
-    public Result update(@RequestBody DishDTO dishDTO) {
-        log.info("修改菜品 {}", dishDTO);
-        dishService.update(dishDTO);
-        return Result.success();
-    }
-
 }

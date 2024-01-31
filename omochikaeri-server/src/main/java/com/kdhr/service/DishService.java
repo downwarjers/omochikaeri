@@ -2,6 +2,7 @@ package com.kdhr.service;
 
 import com.kdhr.dto.DishDTO;
 import com.kdhr.dto.DishPageQueryDTO;
+import com.kdhr.entity.Dish;
 import com.kdhr.result.PageResult;
 import com.kdhr.vo.DishVO;
 
@@ -42,4 +43,18 @@ public interface DishService {
      * @param dishDTO
      */
     void update(DishDTO dishDTO);
+
+    /**
+     * 菜品開售、停售
+     * @param status
+     * @param id
+     */
+    void enable(Integer status, Long id);
+
+    /**
+     * 根據分類id查詢菜餚
+     * @param categoryId
+     * @return
+     */
+    List<Dish> list(Long categoryId);
 }

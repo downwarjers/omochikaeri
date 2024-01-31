@@ -49,7 +49,7 @@ public class DishServiceImpl implements DishService {
         dishMapper.insert(dish);
 
 
-        saveDishFlavor(dishDTO.getFlavors(),dishDTO.getId());
+        saveDishFlavor(dishDTO.getFlavors(), dishDTO.getId());
     }
 
     /**
@@ -93,6 +93,7 @@ public class DishServiceImpl implements DishService {
 
     /**
      * 取得菜品及口味
+     *
      * @param id
      * @return
      */
@@ -110,19 +111,56 @@ public class DishServiceImpl implements DishService {
 
     /**
      * 修改菜品
+     *
      * @param dishDTO
      */
     @Override
     public void update(DishDTO dishDTO) {
-        Dish dish=new Dish();
-        BeanUtils.copyProperties(dishDTO,dish);
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO, dish);
         dishMapper.update(dish);
 
-        saveDishFlavor(dishDTO.getFlavors(),dishDTO.getId());
+        saveDishFlavor(dishDTO.getFlavors(), dishDTO.getId());
 
     }
 
-    private void saveDishFlavor(List<DishFlavor> flavors,Long dishId){
+    /**
+     * 菜品開售、停售
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void enable(Integer status, Long id) {
+        Dish dish = Dish.builder()
+                .id(id)
+                .status(status)
+                .build();
+        dishMapper.update(dish);
+    }
+
+    /**
+     * 根據分類id查詢菜餚
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+
+        return dishMapper.list(dish);
+    }
+
+    /**
+     * 重新設定菜品口味
+     *
+     * @param flavors
+     * @param dishId
+     */
+    private void saveDishFlavor(List<DishFlavor> flavors, Long dishId) {
         dishFlavorMapper.deleteBatchByDishId(Arrays.asList(dishId));
         if (flavors != null && !flavors.isEmpty()) {
             flavors.forEach(x -> {
