@@ -16,10 +16,10 @@ public class MessageConstant {
     public static final String ADDRESS_BOOK_IS_NULL = "使用者位址為空，不能下單";
     public static final String LOGIN_FAILED = "登錄失敗";
     public static final String UPLOAD_FAILED = "檔案上傳失敗";
-    public static final String SETMEAL_ENABLE_FAILED = "套餐內含未啟售菜品，無法啟用";
+    public static final String SETMEAL_ENABLE_FAILED = "套餐內含未開售菜品，無法啟用";
     public static final String PASSWORD_EDIT_FAILED = "密碼修改失敗";
-    public static final String DISH_ON_SALE = "起售中的菜色不能刪除";
-    public static final String SETMEAL_ON_SALE = "起售中的套餐不能刪除";
+    public static final String DISH_ON_SALE = "開售中的菜色不能刪除";
+    public static final String SETMEAL_ON_SALE = "開售中的套餐不能刪除";
     public static final String DISH_BE_RELATED_BY_SETMEAL = "當前菜色關聯了套餐,不能刪除";
     public static final String ORDER_STATUS_ERROR = "訂單狀態錯誤";
     public static final String ORDER_NOT_FOUND = "訂單不存在";

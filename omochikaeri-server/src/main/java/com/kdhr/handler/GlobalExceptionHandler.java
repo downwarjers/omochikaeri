@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
@@ -30,14 +31,15 @@ public class GlobalExceptionHandler {
 
     /**
      * 處理欄位值重複例外
+     *
      * @param ex
      * @return
      */
     @ExceptionHandler
-    public Result exceptionHandler(SQLIntegrityConstraintViolationException ex) {
-        log.info("處理欄位值重複例外");
+    public Result exceptionHandler(SQLException ex) {
+        log.info("處理SQL例外 {}", ex.toString());
         String message = ex.getMessage();
-        if (message.contains("Duplicate entry")) {
+        if (ex instanceof SQLIntegrityConstraintViolationException && message.contains("Duplicate entry")) {
             String[] split = message.split(" ");
             String username = split[2];
             String msg = username + MessageConstant.ALREADY_EXISTS;
