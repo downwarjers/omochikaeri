@@ -40,6 +40,7 @@ public interface DishMapper {
     @Select("select * from dish where id = #{id}")
     Dish getById(Long id);
 
+    DishVO getByIdWithFlavor(Long id);
     /**
      * 分頁查詢菜品
      *
