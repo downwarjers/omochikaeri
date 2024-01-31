@@ -120,6 +120,8 @@ public class DishServiceImpl implements DishService {
         BeanUtils.copyProperties(dishDTO, dish);
         dishMapper.update(dish);
 
+        dishFlavorMapper.deleteBatchByDishId(Arrays.asList(dishDTO.getId()));
+
         saveDishFlavor(dishDTO.getFlavors(), dishDTO.getId());
 
     }
@@ -161,7 +163,6 @@ public class DishServiceImpl implements DishService {
      * @param dishId
      */
     private void saveDishFlavor(List<DishFlavor> flavors, Long dishId) {
-        dishFlavorMapper.deleteBatchByDishId(Arrays.asList(dishId));
         if (flavors != null && !flavors.isEmpty()) {
             flavors.forEach(x -> {
                 x.setDishId(dishId);
