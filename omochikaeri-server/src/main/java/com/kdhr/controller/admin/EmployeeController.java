@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/admin/employee")
-@Api(tags ="員工相關介面")
+@Api(tags = "員工相關介面")
 @Slf4j
 public class EmployeeController {
 
@@ -96,7 +96,7 @@ public class EmployeeController {
      * @param employeePageQueryDTO
      * @return
      */
-    @GetMapping
+    @GetMapping("/page")
     @ApiOperation("分頁查詢員工")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
         log.info("分頁查詢員工，參數為:{}" + employeePageQueryDTO);

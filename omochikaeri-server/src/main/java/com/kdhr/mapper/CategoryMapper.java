@@ -20,9 +20,15 @@ public interface CategoryMapper {
      * @param category
      */
     @AutoFill(OperationType.INSERT)
-    @Insert("insert into category(type, name, sort, status, create_time, update_time, create_user, update_user)" +
-            " VALUES (#{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
     void insert(Category category);
+
+    /**
+     * 根據Id修改分類
+     *
+     * @param category
+     */
+    @AutoFill(OperationType.UPDATE)
+    void update(Category category);
 
     /**
      * 分頁查詢
@@ -40,13 +46,6 @@ public interface CategoryMapper {
     @Delete("delete from category where id = #{id}")
     void deleteById(Long id);
 
-    /**
-     * 根據Id修改分類
-     *
-     * @param category
-     */
-    @AutoFill(OperationType.UPDATE)
-    void update(Category category);
 
     /**
      * 根據類型查詢分類

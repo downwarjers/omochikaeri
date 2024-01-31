@@ -90,7 +90,7 @@ public class CategoryController {
      */
     @PostMapping("/status/{status}")
     @ApiOperation("啟用停用分類")
-    public Result<String> startOrStop(@PathVariable("status") Integer status, Long id) {
+    public Result<String> startOrStop(@PathVariable Integer status, Long id) {
         categoryService.enable(status, id);
         return Result.success();
     }

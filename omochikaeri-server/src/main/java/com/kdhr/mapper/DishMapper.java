@@ -15,15 +15,6 @@ import java.util.List;
 public interface DishMapper {
 
     /**
-     * 根據分類id查詢菜餚數量
-     *
-     * @param categoryId
-     * @return
-     */
-    @Select("select count(id) from dish where category_id = #{categoryId}")
-    Integer countByCategoryId(Long categoryId);
-
-    /**
      * 新增菜品
      *
      * @param dish
@@ -33,12 +24,12 @@ public interface DishMapper {
     void insert(Dish dish);
 
     /**
-     * 分頁查詢菜品
+     * 修改菜品
      *
-     * @param dishPageQueryDTO
-     * @return
+     * @param dish
      */
-    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+    @AutoFill(OperationType.UPDATE)
+    void update(Dish dish);
 
     /**
      * 查詢菜品
@@ -50,19 +41,30 @@ public interface DishMapper {
     Dish getById(Long id);
 
     /**
+     * 分頁查詢菜品
+     *
+     * @param dishPageQueryDTO
+     * @return
+     */
+    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+    /**
+     * 根據分類id查詢菜餚數量
+     *
+     * @param categoryId
+     * @return
+     */
+    @Select("select count(id) from dish where category_id = #{categoryId}")
+    Integer countByCategoryId(Long categoryId);
+
+
+    /**
      * 批量刪除菜品
      *
      * @param ids
      */
     void deleteBatch(List<Long> ids);
 
-    /**
-     * 修改菜品
-     *
-     * @param dish
-     */
-    @AutoFill(OperationType.UPDATE)
-    void update(Dish dish);
 
     /**
      * 根據分類id查詢菜餚
@@ -71,4 +73,12 @@ public interface DishMapper {
      * @return
      */
     List<Dish> list(Dish dish);
+
+    /**
+     * 跟套餐內容取得細項
+     *
+     * @param id
+     * @return
+     */
+    List<Dish> getBySetmealId(Long id);
 }

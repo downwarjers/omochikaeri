@@ -49,7 +49,7 @@ public class DishServiceImpl implements DishService {
         dishMapper.insert(dish);
 
 
-        saveDishFlavor(dishDTO.getFlavors(), dishDTO.getId());
+        saveDishFlavor(dishDTO.getFlavors(), dish.getId());
     }
 
     /**

@@ -12,13 +12,13 @@
     <select id="pageQuery" resultType="com.kdhr.vo.DishVO">
         select d.*,c.name category_name from dish d left outer join category c on d.category_id = c.id
         <where>
-            <if test="name!=null and name !=''">
+            <if test="name!=null">
                 and d.name like "%"#{name}"%"
             </if>
-            <if test="categoryId!=null and categoryId !=''">
+            <if test="categoryId!=null">
                 and d.category_id = #{categoryId}
             </if>
-            <if test="status!=null and status !=''">
+            <if test="status!=null">
                 and d.status = #{status}
             </if>
         </where>
@@ -42,6 +42,8 @@
             <if test="image!=null">image = #{image},</if>
             <if test="description!=null">description = #{description},</if>
             <if test="status!=null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
         </set>
         where id=#{id}
     </update>
@@ -61,5 +63,12 @@
             </if>
         </where>
         order by create_time desc
+    </select>
+
+    <select id="getBySetmealId" resultType="com.kdhr.entity.Dish">
+        select a.*
+        from dish a
+                 left join setmeal_dish b on a.id = b.dish_id
+        where b.setmeal_id = #{setmealId}
     </select>
 </mapper>
