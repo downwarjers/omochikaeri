@@ -16,6 +16,11 @@ spring:
       yyyy-MM-dd HH:mm:ss
     time-zone:
       GMT+8
+  redis:
+    host: ${omochikaeri.redis.host}
+    port: ${omochikaeri.redis.port}
+    password: ${omochikaeri.redis.password}
+    database: ${omochikaeri.redis.database}
 
 mybatis:
   #mapper設定檔

@@ -11,3 +11,8 @@ omochikaeri:
     access-key-id: AKIAU6GDVQJZKY4GHKE5
     access-key-secret: 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
     bucket-name: omochikaeri-aws-bucket
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 0
