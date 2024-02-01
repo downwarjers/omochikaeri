@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/admin/category")
 @Api(tags = "分類相關介面")
 @Slf4j
-public class CategoryController {
+public class AdminCategoryController {
 
     @Autowired
     private CategoryService categoryService;

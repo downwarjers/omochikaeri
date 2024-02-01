@@ -27,7 +27,7 @@ import java.util.Map;
 @RequestMapping("/admin/employee")
 @Api(tags = "員工相關介面")
 @Slf4j
-public class EmployeeController {
+public class AdminEmployeeController {
 
     @Autowired
     private EmployeeService employeeService;

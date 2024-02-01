@@ -1,15 +1,12 @@
 package com.kdhr.controller.admin;
 
-import com.kdhr.annotation.AutoFill;
 import com.kdhr.dto.DishDTO;
 import com.kdhr.dto.DishPageQueryDTO;
 import com.kdhr.entity.Dish;
-import com.kdhr.enumeration.OperationType;
 import com.kdhr.result.PageResult;
 import com.kdhr.result.Result;
 import com.kdhr.service.DishService;
 import com.kdhr.vo.DishVO;
-import com.kdhr.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +22,7 @@ import java.util.List;
 @RequestMapping("/admin/dish")
 @Api(tags = "菜品相關介面")
 @Slf4j
-public class DishController {
+public class AdminDishController {
     @Autowired
     private DishService dishService;
 
