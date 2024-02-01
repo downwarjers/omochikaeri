@@ -76,7 +76,7 @@ public class DishServiceImpl implements DishService {
     public void deleteBatch(List<Long> ids) {
         ids.forEach(id -> {
             Dish dish = dishMapper.getById(id);
-            if (dish.getStatus() == StatusConstant.ENABLE) {
+            if (StatusConstant.ENABLE.equals(dish.getStatus())) {
                 throw new DeletionNotAllowedException(MessageConstant.DISH_ON_SALE);
             }
         });
@@ -143,6 +143,7 @@ public class DishServiceImpl implements DishService {
 
     /**
      * 根據分類id查詢菜餚
+     *
      * @param categoryId
      * @return
      */

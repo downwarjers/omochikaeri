@@ -14,6 +14,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import software.amazon.awssdk.http.HttpStatusCode;
 
 import java.io.IOException;
 import java.net.URI;
@@ -57,7 +58,7 @@ public class HttpClientUtil {
             response = httpClient.execute(httpGet);
 
             //判斷回應狀態
-            if(response.getStatusLine().getStatusCode() == 200){
+            if(response.getStatusLine().getStatusCode() == HttpStatusCode.OK){
                 result = EntityUtils.toString(response.getEntity(),"UTF-8");
             }
         }catch (Exception e){

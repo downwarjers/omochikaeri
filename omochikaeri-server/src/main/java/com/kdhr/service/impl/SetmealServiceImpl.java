@@ -88,11 +88,11 @@ public class SetmealServiceImpl implements SetmealService {
      */
     @Override
     public void enable(Integer status, Long id) {
-        if (status == StatusConstant.ENABLE) {
+        if (StatusConstant.ENABLE.equals(status)) {
             List<Dish> dishList = dishMapper.getBySetmealId(id);
             if (dishList != null && !dishList.isEmpty()) {
                 dishList.forEach(dish -> {
-                    if (StatusConstant.DISABLE == dish.getStatus()) {
+                    if (StatusConstant.DISABLE.equals(dish.getStatus())) {
                         throw new SetmealEnableFailedException(MessageConstant.SETMEAL_ENABLE_FAILED);
                     }
                 });
@@ -115,7 +115,7 @@ public class SetmealServiceImpl implements SetmealService {
     public void deleteBatch(List<Long> ids) {
         ids.forEach(id -> {
             Setmeal setmeal = setmealMapper.getById(id);
-            if (StatusConstant.ENABLE == setmeal.getStatus()) {
+            if (StatusConstant.ENABLE.equals(setmeal.getStatus())) {
                 throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ON_SALE);
             }
         });
