@@ -18,6 +18,7 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -42,13 +43,23 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/admin/employee/login");
     }
 
+    @Bean
+    public Docket adminDocket() {
+        return docket("管理", "com.kdhr.controller.admin");
+    }
+
+    @Bean
+    public Docket userDocket() {
+        return docket("用戶", "com.kdhr.controller.user");
+    }
+
     /**
      * 透過knife4j產生介面文檔
      *
      * @return
      */
-    @Bean
-    public Docket docket() {
+
+    private Docket docket(String groupName, String packageName) {
         log.info("透過knife4j產生介面文檔");
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("OMOCHI外送專案介面文件")
@@ -57,12 +68,14 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
+                .groupName(groupName)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.kdhr"))
+                .apis(RequestHandlerSelectors.basePackage(packageName))
                 .paths(PathSelectors.any())
                 .build();
         return docket;
     }
+
 
     /**
      * 設定靜態資源映射
