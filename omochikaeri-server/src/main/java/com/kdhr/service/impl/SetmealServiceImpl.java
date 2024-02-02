@@ -16,6 +16,7 @@ import com.kdhr.mapper.SetmealDishMapper;
 import com.kdhr.mapper.SetmealMapper;
 import com.kdhr.result.PageResult;
 import com.kdhr.service.SetmealService;
+import com.kdhr.vo.DishItemVO;
 import com.kdhr.vo.SetmealVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -146,5 +147,27 @@ public class SetmealServiceImpl implements SetmealService {
     @Override
     public SetmealVO getById(Long id) {
         return setmealMapper.getByIdWithDish(id);
+    }
+
+    /**
+     * 根據條件查詢套餐
+     *
+     * @param setmeal
+     * @return
+     */
+    @Override
+    public List<Setmeal> list(Setmeal setmeal) {
+        return setmealMapper.list(setmeal);
+    }
+
+    /**
+     * 根據分類Id查詢套餐所含的菜品表
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public List<DishItemVO> getDishItemById(Long id) {
+        return setmealMapper.getDishItemBySetmealId(id);
     }
 }

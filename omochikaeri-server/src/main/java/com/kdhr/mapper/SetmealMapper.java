@@ -6,6 +6,7 @@ import com.kdhr.dto.SetmealDTO;
 import com.kdhr.dto.SetmealPageQueryDTO;
 import com.kdhr.entity.Setmeal;
 import com.kdhr.enumeration.OperationType;
+import com.kdhr.vo.DishItemVO;
 import com.kdhr.vo.SetmealVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -73,4 +74,20 @@ public interface SetmealMapper {
      * @return
      */
     SetmealVO getByIdWithDish(Long id);
+
+    /**
+     * 根據條件查詢套餐
+     *
+     * @param setmeal
+     * @return
+     */
+    List<Setmeal> list(Setmeal setmeal);
+
+    /**
+     * 根據分類Id查詢套餐所含的菜品表
+     *
+     * @param setmealId
+     * @return
+     */
+    List<DishItemVO> getDishItemBySetmealId(Long setmealId);
 }

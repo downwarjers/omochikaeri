@@ -2,7 +2,9 @@ package com.kdhr.service;
 
 import com.kdhr.dto.SetmealDTO;
 import com.kdhr.dto.SetmealPageQueryDTO;
+import com.kdhr.entity.Setmeal;
 import com.kdhr.result.PageResult;
+import com.kdhr.vo.DishItemVO;
 import com.kdhr.vo.SetmealVO;
 
 import java.util.List;
@@ -52,4 +54,20 @@ public interface SetmealService {
      * @return
      */
     SetmealVO getById(Long id);
+
+    /**
+     * 根據條件查詢套餐
+     *
+     * @param setmeal
+     * @return
+     */
+    List<Setmeal> list(Setmeal setmeal);
+
+    /**
+     * 根據分類Id查詢套餐所含的菜品表
+     *
+     * @param id
+     * @return
+     */
+    List<DishItemVO> getDishItemById(Long id);
 }
