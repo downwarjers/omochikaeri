@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 @Slf4j
-public class JwtTokenAdminInterceptor implements HandlerInterceptor {
+public class JwtTokenUserInterceptor implements HandlerInterceptor {
 
     @Autowired
     private JwtProperties jwtProperties;
@@ -45,18 +45,15 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
         }
 
         //1、從請求頭中取得令牌
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
+        String token = request.getHeader(jwtProperties.getUserTokenName());
 
         //2、校驗令牌
         try {
             log.info("jwt校驗:{}", token);
-            Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
-            Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
-            log.info("現任員工id：", empId);
+            Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
+            Long empId = Long.valueOf(claims.get(JwtClaimsConstant.USER_ID).toString());
 
-            //將empId放入ThreadLocal中
-            BaseContext.setCurrentId(empId);
-
+            log.info("現任用戶的id：", empId);
             //3、通過，放行
             return true;
         } catch (Exception ex) {

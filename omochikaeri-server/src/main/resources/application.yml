@@ -47,6 +47,9 @@ omochikaeri:
     admin-ttl: 7200000
     # 設定前端傳遞過來的令牌名稱
     admin-token-name: token
+    user-secret-key: itheima
+    user-ttl: 7200000
+    user-token-name: authentication
   awsoss:
     access-key-id: ${omochikaeri.awsoss.access-key-id}
     access-key-secret: ${omochikaeri.awsoss.access-key-secret}
