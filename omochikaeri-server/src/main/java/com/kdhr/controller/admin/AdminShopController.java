@@ -2,6 +2,7 @@ package com.kdhr.controller.admin;
 
 import com.kdhr.constant.ShopConstant;
 import com.kdhr.result.Result;
+import com.kdhr.service.ShopService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
@@ -21,22 +22,30 @@ import software.amazon.awssdk.http.HttpStatusCode;
 @Slf4j
 public class AdminShopController {
     @Autowired
-    private RedisTemplate redisTemplate;
+    private ShopService shopService;
 
-
+    /**
+     * 設定營業狀態
+     * @param status
+     * @return
+     */
     @PutMapping("/{status}")
     @ApiOperation("設定營業狀態")
     public Result setStatus(@PathVariable Integer status) {
+        shopService.setStatus(status);
         log.info("設定營業狀態 {}", ShopConstant.shopStatusValueOf(status));
 
-        redisTemplate.opsForValue().set(ShopConstant.SHOP_STATUS_KEY, status);
         return Result.success();
     }
 
+    /**
+     * 獲取營業狀態
+     * @return
+     */
     @GetMapping("/status")
     @ApiOperation("獲取營業狀態")
     public Result<Integer> getStatus() {
-        Integer status = (Integer) redisTemplate.opsForValue().get(ShopConstant.SHOP_STATUS_KEY);
+        Integer status = shopService.getStatus();
         log.info("獲取營業狀態 {}", ShopConstant.shopStatusValueOf(status));
 
         return Result.success(status);
