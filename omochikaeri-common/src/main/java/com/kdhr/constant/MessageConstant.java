@@ -23,5 +23,6 @@ public class MessageConstant {
     public static final String DISH_BE_RELATED_BY_SETMEAL = "當前菜色關聯了套餐,不能刪除";
     public static final String ORDER_STATUS_ERROR = "訂單狀態錯誤";
     public static final String ORDER_NOT_FOUND = "訂單不存在";
+    public static final String CANNOT_FIND_DEFAULT_ADDRESS = "沒有查詢預設位址";
 
 }
