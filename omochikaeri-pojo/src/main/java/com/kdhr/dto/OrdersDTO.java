@@ -32,7 +32,7 @@ public class OrdersDTO implements Serializable {
     //結賬時間
     private LocalDateTime checkoutTime;
 
-    //支付方式 1微信，2支付寶
+    //支付方式 1現金，2LinePay
     private Integer payMethod;
 
     //實收金額

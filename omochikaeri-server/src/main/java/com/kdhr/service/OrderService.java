@@ -1,5 +1,6 @@
 package com.kdhr.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kdhr.dto.*;
 import com.kdhr.result.PageResult;
 import com.kdhr.vo.OrderStatisticsVO;
@@ -12,7 +13,7 @@ public interface OrderService {
      * @param ordersSubmitDTO
      * @return
      */
-    OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO);
+    OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO) throws JsonProcessingException, Exception;
 
     /**
      * 歷史訂單

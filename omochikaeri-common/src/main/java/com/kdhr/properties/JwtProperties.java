@@ -17,7 +17,7 @@ public class JwtProperties {
     private String adminTokenName;
 
     /**
-     * 用戶端微信用戶產生jwt令牌相關配置
+     * 用戶端產生jwt令牌相關配置
      */
     private String userSecretKey;
     private long userTtl;

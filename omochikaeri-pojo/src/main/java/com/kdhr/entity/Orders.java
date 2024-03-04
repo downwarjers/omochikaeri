@@ -39,6 +39,13 @@ public class Orders implements Serializable {
     public static final Integer REFUND = 2;
 
 
+    /**
+     * 支付方式 1現金，2LinePay
+     */
+    public static final Integer CASH = 1;
+    public static final Integer LINE_PAY = 2;
+
+
     private Long id;
 
     //訂單號
@@ -59,7 +66,7 @@ public class Orders implements Serializable {
     //結賬時間
     private LocalDateTime checkoutTime;
 
-    //支付方式 1微信，2支付寶
+    //支付方式 1現金，2LinePay
     private Integer payMethod;
 
     //支付狀態 0未支付 1已支付 2退款

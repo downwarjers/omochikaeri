@@ -1,5 +1,7 @@
 package com.kdhr.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.kdhr.constant.MessageConstant;
@@ -21,6 +23,7 @@ import com.kdhr.service.OrderService;
 import com.kdhr.vo.OrderStatisticsVO;
 import com.kdhr.vo.OrderSubmitVO;
 import com.kdhr.vo.OrderVO;
+import com.kdhr.websocket.WebSocketServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +50,8 @@ public class OrderServiceImpl implements OrderService {
     private AddressBookMapper addressBookMapper;
     @Autowired
     private ShoppingCartMapper shoppingCartMapper;
+    @Autowired
+    private WebSocketServer webSocketServer;
 
 
     /**
@@ -56,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     @Transactional
-    public OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO) {
+    public OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO) throws Exception {
         //檢查地址
         AddressBook addressBook = addressBookMapper.getById(ordersSubmitDTO.getAddressBookId());
         if (addressBook == null) {
@@ -109,6 +115,17 @@ public class OrderServiceImpl implements OrderService {
                 .orderNumber(orders.getNumber())
                 .orderAmount(orders.getAmount())
                 .build();
+
+
+
+        if(orders.getPayMethod().equals(Orders.CASH)){
+            HashMap map =new HashMap();
+            map.put("type",1);
+            map.put("orderId",orders.getId());
+            map.put("content","訂單號"+orders.getNumber());
+            String json = new ObjectMapper().writeValueAsString(map);
+            webSocketServer.sendToAllClient(json);
+        }
         return orderSubmitVO;
     }
 
