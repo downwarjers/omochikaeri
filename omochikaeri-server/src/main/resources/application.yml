@@ -8,7 +8,7 @@ spring:
     allow-circular-references: true
   datasource:
     driver-class-name: ${omochikaeri.datasource.driver-class-name}
-    url: jdbc:mysql://${omochikaeri.datasource.host}:${omochikaeri.datasource.port}/${omochikaeri.datasource.database}?serverTimezone=Asia/Taipei&characterEncoding=utf-8
+    url: jdbc:postgresql://${omochikaeri.datasource.host}:${omochikaeri.datasource.port}/${omochikaeri.datasource.database}
     username: ${omochikaeri.datasource.username}
     password: ${omochikaeri.datasource.password}
   jackson:
