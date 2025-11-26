@@ -17,7 +17,7 @@
         </where>
     </select>
 
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into address_book
         (user_id, consignee, phone, sex, province_code, province_name, city_code, city_name, district_code,
          district_name, detail, label, is_default)
