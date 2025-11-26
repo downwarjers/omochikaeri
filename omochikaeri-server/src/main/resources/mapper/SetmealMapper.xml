@@ -22,7 +22,7 @@
         select s.*,c.name category_name from setmeal s left join category c on s.category_id = c.id
         <where>
             <if test="name != null">
-                and s.name like "%"#{name}"%"
+                and s.name like concat('%',#{name},'%')
             </if>
             <if test="status != null">
                 and s.status = #{status}
@@ -66,7 +66,7 @@
         select * from setmeal
         <where>
             <if test="name != null">
-                and name like "%"#{name}"%"
+                and name like concat('%',#{name},'%')
             </if>
             <if test="categoryId != null">
                 and category_id = #{categoryId}
