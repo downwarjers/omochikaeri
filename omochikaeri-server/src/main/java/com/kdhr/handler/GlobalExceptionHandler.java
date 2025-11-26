@@ -30,21 +30,23 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 處理SQL例外
-     *
+     * 處理 SQL 異常 (包含 MySQL 和 PostgreSQL)
      * @param ex
      * @return
      */
     @ExceptionHandler
     public Result exceptionHandler(SQLException ex) {
-        log.info("處理SQL例外 {}", ex);
+        log.info("處理SQL例外 {}", ex.getMessage()); // 印出錯誤訊息就好，不要印整個 stack trace 嚇自己
+
         String message = ex.getMessage();
-        if (ex instanceof SQLIntegrityConstraintViolationException && message.contains("Duplicate entry")) {
-            String[] split = message.split(" ");
-            String username = split[2];
-            String msg = username + MessageConstant.ALREADY_EXISTS;
-            return Result.error(msg);
+
+        // 1.標準 SQL 狀態碼 23505  為 "unique_violation"
+        if ("23505".equals(ex.getSQLState())
+        // 2.如果狀態碼沒抓到，再用字串判斷
+        ||(ex.getMessage() != null && (message.contains("Duplicate entry") || message.contains("duplicate key value")))) {
+            return Result.error(MessageConstant.ALREADY_EXISTS);
         }
+
         return Result.error(MessageConstant.UNKNOWN_ERROR);
     }
 }
