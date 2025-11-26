@@ -29,7 +29,7 @@ mybatis:
   configuration:
     #開啟駝峰命名
     map-underscore-to-camel-case: true
-    default-schema: omochikaeri
+    default-schema: public
 
 logging:
   level:
