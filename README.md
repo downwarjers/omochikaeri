@@ -14,7 +14,7 @@
 - **Java 11**
 - **Spring Boot 2.x**
 - **MyBaits**（用於與資料庫交互）
-- **MySql 資料庫**（資料庫）
+- **PostgreSql 資料庫**（資料庫）
 - **Lombok**（減少樣板代碼）
 - **Maven**（用於依賴管理）
 - **Amazon S3**（用於資料儲存）
@@ -23,4 +23,4 @@
 
 - Java 11 或更新版本
 - Maven 2.x
-- MySql 8.0 或更新版本
+- PostgreSql 16

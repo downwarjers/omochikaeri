@@ -26,8 +26,8 @@
         <jjwt>0.9.1</jjwt>
         <jaxb-api>2.3.1</jaxb-api>
         <httpcomponents>4.5.14</httpcomponents>
-        <mysql>8.0.22</mysql>
         <awssdk>2.23.12</awssdk>
+        <postgresql>42.7.3</postgresql>
         <poi>3.16</poi>
     </properties>
     <dependencyManagement>
@@ -120,9 +120,9 @@
             </dependency>
 
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql}</version>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql}</version>
                 <scope>runtime</scope>
             </dependency>
 
