@@ -1,0 +1,37 @@
+services:
+  redis:
+    image: 'redis:alpine'
+    container_name: ann-redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/data'
+    restart: always
+  postgres:
+    image: 'postgres:16-alpine'
+    container_name: ann-postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: omochikaeri
+      TZ: Asia/Taipei
+    volumes:
+      - 'pg_data:/var/lib/postgresql/data'
+    restart: always
+  nginx-front:
+    build:
+      context: 'D:/code/github/TTTT'
+    container_name: ann-nginx-front
+    ports:
+      - '80:80'
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - 'D:/code/github/TTTT/html:/usr/share/nginx/html'
+    restart: always
+volumes:
+  redis_data:
+  pg_data:
