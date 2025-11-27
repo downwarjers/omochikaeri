@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/08f5c1d3-3c7c-4b04-8ba5-b9455c650eae/console.sql" value="5ac88c0f-e9a8-4128-b924-e4da604ceb0b" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/5ac88c0f-e9a8-4128-b924-e4da604ceb0b/console.sql" value="5ac88c0f-e9a8-4128-b924-e4da604ceb0b" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/5ac88c0f-e9a8-4128-b924-e4da604ceb0b/console_1.sql" value="5ac88c0f-e9a8-4128-b924-e4da604ceb0b" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/5ac88c0f-e9a8-4128-b924-e4da604ceb0b/console_2.sql" value="5ac88c0f-e9a8-4128-b924-e4da604ceb0b" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/5ac88c0f-e9a8-4128-b924-e4da604ceb0b/console_3.sql" value="5ac88c0f-e9a8-4128-b924-e4da604ceb0b" />
     <file url="file://$PROJECT_DIR$/omochikaeri-server/src/main/resources/mapper/AddressBookMapper.xml" value="5ac88c0f-e9a8-4128-b924-e4da604ceb0b" />
     <file url="file://$PROJECT_DIR$/omochikaeri-server/src/main/resources/mapper/CategoryMapper.xml" value="5ac88c0f-e9a8-4128-b924-e4da604ceb0b" />
     <file url="file://$PROJECT_DIR$/omochikaeri-server/src/main/resources/mapper/EmployeeMapper.xml" value="5ac88c0f-e9a8-4128-b924-e4da604ceb0b" />
