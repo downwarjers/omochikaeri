@@ -17,6 +17,7 @@
         <module>omochikaeri-server</module>
     </modules>
     <properties>
+        <postgresql>42.7.3</postgresql>
         <mybatis.spring>2.2.0</mybatis.spring>
         <lombok>1.18.26</lombok>
         <commons.lang>2.6</commons.lang>
@@ -27,7 +28,6 @@
         <jaxb-api>2.3.1</jaxb-api>
         <httpcomponents>4.5.14</httpcomponents>
         <awssdk>2.23.12</awssdk>
-        <postgresql>42.7.3</postgresql>
         <poi>3.16</poi>
     </properties>
     <dependencyManagement>
