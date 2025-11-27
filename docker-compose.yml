@@ -12,8 +12,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data  # 資料持久化，避免重開就不見
-      # - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql # (選用) 自動匯入 SQL
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql # 自動匯入 SQL
 
   # Redis 快取服務
   omochi-redis:
