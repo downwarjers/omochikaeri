@@ -65,3 +65,7 @@ Omochikaeri 是一個基於 **Spring Boot** 與 **MyBatis** 構建的後端 REST
 
    # 啟動 Redis
    docker run --name omochi-redis -p 6379:6379 -d redis
+   ```
+2. **資料庫初始化:**
+   本專案已在 Docker Compose 配置中掛載 `sql/init.sql`。
+   首次啟動 `docker-compose up -d` 時，PostgreSQL 容器會自動執行該腳本，完成資料表建置、預設資料匯入。
