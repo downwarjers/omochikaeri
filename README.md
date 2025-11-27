@@ -49,20 +49,19 @@ Omochikaeri 是一個基於 **Spring Boot** 與 **MyBatis** 構建的後端 REST
 
 ## 🚀 快速開始 (Quick Start)
 
-### 環境要求
-* JDK 11+
-* Maven 3.x
-* PostgreSQL
-* Redis
+### 環境需求
+* **JDK:** 11+
+* **Build Tool:** Maven 3.x
+* **Infrastructure:** Docker (用於快速部署 PostgreSQL 與 Redis)
 
-### 設定說明
-1.  匯入 SQL 文件至 PostgreSQL 資料庫。
-2.  修改 `application-dev.yml` 中的資料庫與 Redis 連線資訊。
-3.  (可選) 設定 AWS S3 的 `access-key-id` 與 `secret` 以啟用圖片上傳功能。
+### 開發環境建置 (Development Setup)
+本專案建議使用 Docker 快速啟動所需的資料庫與快取服務，避免繁瑣的環境安裝。
 
-```yaml
-omochikaeri:
-  datasource:
-    host: localhost
-    port: 5432
-    database: omochikaeri
+1. **啟動基礎設施 (Infrastructure):**
+   使用 Docker 執行 PostgreSQL 與 Redis：
+   ```bash
+   # 啟動 PostgreSQL (預設帳密: postgres/123456)
+   docker run --name omochi-pg -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d postgres:16
+
+   # 啟動 Redis
+   docker run --name omochi-redis -p 6379:6379 -d redis
