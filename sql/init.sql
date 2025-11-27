@@ -332,3 +332,22 @@ COMMENT ON COLUMN "user".phone IS '手機號碼';
 COMMENT ON COLUMN "user".sex IS '性別';
 COMMENT ON COLUMN "user".id_number IS '身分證字號';
 COMMENT ON COLUMN "user".avatar IS '頭像';
+
+
+-- =============================================
+-- 序列校正 (Sequence Reset)
+-- =============================================
+-- 因為手動插入了指定 ID 的資料，必須將序列重置到目前最大 ID，
+-- 否則後續透過程式新增資料時會報錯 (Duplicate key error)。
+
+SELECT setval(pg_get_serial_sequence('address_book', 'id'), COALESCE(MAX(id), 1)) FROM address_book;
+SELECT setval(pg_get_serial_sequence('category', 'id'), COALESCE(MAX(id), 1)) FROM category;
+SELECT setval(pg_get_serial_sequence('dish', 'id'), COALESCE(MAX(id), 1)) FROM dish;
+SELECT setval(pg_get_serial_sequence('dish_flavor', 'id'), COALESCE(MAX(id), 1)) FROM dish_flavor;
+SELECT setval(pg_get_serial_sequence('employee', 'id'), COALESCE(MAX(id), 1)) FROM employee;
+SELECT setval(pg_get_serial_sequence('order_detail', 'id'), COALESCE(MAX(id), 1)) FROM order_detail;
+SELECT setval(pg_get_serial_sequence('orders', 'id'), COALESCE(MAX(id), 1)) FROM orders;
+SELECT setval(pg_get_serial_sequence('setmeal', 'id'), COALESCE(MAX(id), 1)) FROM setmeal;
+SELECT setval(pg_get_serial_sequence('setmeal_dish', 'id'), COALESCE(MAX(id), 1)) FROM setmeal_dish;
+SELECT setval(pg_get_serial_sequence('shopping_cart', 'id'), COALESCE(MAX(id), 1)) FROM shopping_cart;
+SELECT setval(pg_get_serial_sequence('"user"', 'id'), COALESCE(MAX(id), 1)) FROM "user";
